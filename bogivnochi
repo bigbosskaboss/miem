@@ -1,0 +1,158 @@
+import telebot as tb
+from telebot import types
+bot = tb.TeleBot("1243726622:AAGrVuKUackFljYRgLG_8Ptj2zEpzBByc5A")
+
+
+def get_start_keyboard():
+    start_keyboard = types.InlineKeyboardMarkup()
+    button_join = types.InlineKeyboardButton(text="Список доступных ночных точек", callback_data='join')
+    start_keyboard.add(button_join)
+    return start_keyboard
+
+
+@bot.message_handler(commands=['start'])
+def get_messages(message):
+    if message.text == '/start':
+        bot.send_message(message.from_user.id, "Приветствую тебя, Адепт!\n"    
+"Я - твой проводник в ночное веселье.\n"
+"При помощи данного бота ты сможешь узнать о всех доступных ночных точках, их расположении и графике работы.", reply_markup=get_start_keyboard())
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback_worker(call):
+    if call.data == 'join':
+        join_keyboard = types.InlineKeyboardMarkup()
+        button_tochka_1 = types.InlineKeyboardButton(text='Алкомарафон🔥', callback_data='1')
+        button_tochka_2 = types.InlineKeyboardButton(text='Бирпонг', callback_data='2')
+        button_tochka_3 = types.InlineKeyboardButton(text='Дженга', callback_data='3')
+        button_tochka_4 = types.InlineKeyboardButton(text='ЗАГС', callback_data='4')
+        button_tochka_5 = types.InlineKeyboardButton(text='Алкополия', callback_data='5')
+        button_tochka_6 = types.InlineKeyboardButton(text='Правда или Действие🔥', callback_data='6')
+        button_tochka_7 = types.InlineKeyboardButton(text='Кубики', callback_data='7')
+        button_tochka_8 = types.InlineKeyboardButton(text='Муз. Шоты🔥', callback_data='8')
+        button_tochka_9 = types.InlineKeyboardButton(text='Что Вам Нравится🔥', callback_data='9')
+        button_tochka_10 = types.InlineKeyboardButton(text='Ангел и Демон', callback_data='10')
+        button_tochka_11 = types.InlineKeyboardButton(text='Олимп 2', callback_data='11')
+        button_tochka_12 = types.InlineKeyboardButton(text='Умницы и Пьяницы', callback_data='12')
+        button_tochka_13 = types.InlineKeyboardButton(text='Орел или Решка🔥', callback_data='13')
+        join_keyboard.add(button_tochka_1)
+        join_keyboard.add(button_tochka_2)
+        join_keyboard.add(button_tochka_3)
+        join_keyboard.add(button_tochka_4)
+        join_keyboard.add(button_tochka_5)
+        join_keyboard.add(button_tochka_6)
+        join_keyboard.add(button_tochka_7)
+        join_keyboard.add(button_tochka_8)
+        join_keyboard.add(button_tochka_9)
+        join_keyboard.add(button_tochka_10)
+        join_keyboard.add(button_tochka_11)
+        join_keyboard.add(button_tochka_12)
+        join_keyboard.add(button_tochka_13)
+
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text="выбери точку", reply_markup=join_keyboard)
+    if call.data == '1':
+        keyboard = types.InlineKeyboardMarkup()
+        button_cancel = types.InlineKeyboardButton(text="Назад", callback_data='back')
+        keyboard.add(button_cancel)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text="Алкомарафон - запойный кросс \nВремя: 23:00 - 04:00 \nМесто: фойе \nПри прохождении всех точек с пометкой 🔥, "
+                                   "Адепт получает ценные призы от спонсоров мероприятия!",
+                              reply_markup=keyboard)
+
+    if call.data == '2':
+        keyboard = types.InlineKeyboardMarkup()
+        button_cancel = types.InlineKeyboardButton(text="Назад", callback_data='back')
+        keyboard.add(button_cancel)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text='Бирпонг - теннис без ракеток, if you know what I mean \nВремя: 23:00 - 05:00 \n'
+
+                                   "Место: первый этаж, под лестницей",
+                              reply_markup=keyboard)
+    if call.data == '3':
+        keyboard = types.InlineKeyboardMarkup()
+        button_cancel = types.InlineKeyboardButton(text="Назад", callback_data='back')
+        keyboard.add(button_cancel)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text="Дженга - традиционный XXL конструктор \nВремя: 23:00 - 05:00 \nМесто: фойе",
+                              reply_markup=keyboard)
+    if call.data == '4':
+        keyboard = types.InlineKeyboardMarkup()
+        button_cancel = types.InlineKeyboardButton(text="Назад", callback_data='back')
+        keyboard.add(button_cancel)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text="ЗАГС - свадебный переполох\nВремя: 00:00 - 02:00 \n"
+                                   "Место: коридор первого этажа направо от лестницы",
+                              reply_markup=keyboard)
+    if call.data == '5':
+        keyboard = types.InlineKeyboardMarkup()
+        button_cancel = types.InlineKeyboardButton(text="Назад", callback_data='back')
+        keyboard.add(button_cancel)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text="Алкополия - как я заработал свой первый цирроз печени\nВремя: 23:00 - 05:00 \nМесто: комната рядом с конференц залом",
+                              reply_markup=keyboard)
+    if call.data == '6':
+        keyboard = types.InlineKeyboardMarkup()
+        button_cancel = types.InlineKeyboardButton(text="Назад", callback_data='back')
+        keyboard.add(button_cancel)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text="Правда или действие - лучше действие\nВремя: 23:00 - 02:00 \nМесто: фойе\nПри прохождении всех точек с пометкой 🔥, \n"
+                                   "Адепт получает ценные призы от спонсоров мероприятия!",
+                              reply_markup=keyboard)
+    if call.data == '7':
+        keyboard = types.InlineKeyboardMarkup()
+        button_cancel = types.InlineKeyboardButton(text="Назад", callback_data='back')
+        keyboard.add(button_cancel)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text="Кубики - часть тела х действие\nВремя: 02:00 - 04:00 \nМесто: фойе",
+                              reply_markup=keyboard)
+    if call.data == '8':
+        keyboard = types.InlineKeyboardMarkup()
+        button_cancel = types.InlineKeyboardButton(text="Назад", callback_data='back')
+        keyboard.add(button_cancel)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text="Муз. шоты - кто успел, тот и сел (на бутылку)\nВремя: 23:00 - 01:00 \nМесто: конференц. зал\nПри прохождении всех точек с пометкой 🔥, \n"
+                                   "Адепт получает ценные призы от спонсоров мероприятия!",
+                              reply_markup=keyboard)
+    if call.data == '9':
+        keyboard = types.InlineKeyboardMarkup()
+        button_cancel = types.InlineKeyboardButton(text="Назад", callback_data='back')
+        keyboard.add(button_cancel)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text="Что вам нравится - что?\nВремя: 23:00 - 01:00 \nМесто: конференц зал\nПри прохождении всех точек с пометкой 🔥,\n "
+                                   "Адепт получает ценные призы от спонсоров мероприятия!",
+                              reply_markup=keyboard)
+    if call.data == '10':
+        keyboard = types.InlineKeyboardMarkup()
+        button_cancel = types.InlineKeyboardButton(text="Назад", callback_data='back')
+        keyboard.add(button_cancel)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text="Ангел и Демон - искупи свои грехи\nВремя: 01:00 - 04:00 \nМесто: конференц зал",
+                              reply_markup=keyboard)
+    if call.data == '11':
+        keyboard = types.InlineKeyboardMarkup()
+        button_cancel = types.InlineKeyboardButton(text="Назад", callback_data='back')
+        keyboard.add(button_cancel)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text="Олимп 2 - божественный тиндер\nВремя: 23:00 - 02:00 \nМесто: 1 этаж, мини-комната",
+                              reply_markup=keyboard)
+    if call.data == '12':
+        keyboard = types.InlineKeyboardMarkup()
+        button_cancel = types.InlineKeyboardButton(text="Назад", callback_data='back')
+        keyboard.add(button_cancel)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text="Умницы или пьяницы - Тина Канделаки спилась\n Время: 02:00 - 04:00 \nМесто: 1 этаж, мини-комната",
+                              reply_markup=keyboard)
+    if call.data == '13':
+        keyboard = types.InlineKeyboardMarkup()
+        button_cancel = types.InlineKeyboardButton(text="Назад", callback_data='back')
+        keyboard.add(button_cancel)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text="Орел или решка - пьяная кругосветка\nВремя: 23:00 - 02:00 \nМесто: 2 этаж, холл\nПри прохождении всех точек с пометкой 🔥, "
+                                   "Адепт получает ценные призы от спонсоров мероприятия!",
+                              reply_markup=keyboard)
+    if call.data == 'back':
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
+                              text="Выбери точку", reply_markup=get_start_keyboard())
+
+
+bot.polling(none_stop=True, interval=0)
